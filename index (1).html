@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Virginia Cathey Collections — Fashion designer, entrepreneur, and creative visionary. Brooklyn-born. World-renowned.">
+  <meta property="og:title" content="Virginia Cathey Collections">
+  <meta property="og:description" content="Designer. Creator. Visionary. Straight out the womb.">
+  <meta property="og:type" content="website">
+  <title>Virginia Cathey Collections</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       GLOBAL — Variables · Reset · Typography · Shared
+    ============================================================ */
+    :root {
+      --color-bg:         #0e0a07;
+      --color-bg-alt:     #1a1108;
+      --color-surface:    #231608;
+      --color-gold:       #c9a84c;
+      --color-gold-light: #e8c97a;
+      --color-jewel-1:    #6b2d3e;
+      --color-jewel-2:    #1e3a5f;
+      --color-jewel-3:    #2d5a3d;
+      --color-earth-1:    #8b4513;
+      --color-earth-2:    #5c3d2e;
+      --color-cream:      #f5ead8;
+      --color-text:       #e8dcc8;
+      --color-text-muted: #9e8e7a;
+      --color-border:     rgba(201,168,76,0.2);
+      --font-display:     'Cinzel', serif;
+      --font-heading:     'Cormorant Garamond', serif;
+      --font-body:        'DM Sans', sans-serif;
+      --ease:             cubic-bezier(0.4,0,0.2,1);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-weight:300;line-height:1.7;cursor:none;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9998}
+    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+    button{cursor:none;border:none;background:none;font:inherit}
+
+    /* Cursor */
+    #cursor-dot,#cursor-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+    #cursor-dot{width:8px;height:8px;background:var(--color-gold);top:0;left:0}
+    #cursor-ring{width:32px;height:32px;border:1.5px solid var(--color-gold);top:0;left:0;opacity:.6;transition:width .25s ease,height .25s ease,border-color .25s ease,opacity .3s}
+    #cursor-ring.hovered{width:48px;height:48px;border-color:var(--color-gold-light);opacity:1}
+
+    /* Nav */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:28px 60px;display:flex;align-items:center;justify-content:space-between;transition:background .35s var(--ease),padding .35s var(--ease)}
+    .nav.scrolled{background:rgba(14,10,7,.93);backdrop-filter:blur(12px);padding:18px 60px;border-bottom:1px solid var(--color-border)}
+    .nav-logo{font-family:var(--font-display);font-size:.88rem;letter-spacing:.22em;color:var(--color-gold);text-transform:uppercase}
+    .nav-links{display:flex;gap:42px;align-items:center}
+    .nav-links a{font-size:.73rem;letter-spacing:.18em;text-transform:uppercase;color:var(--color-text-muted);position:relative;transition:color .35s var(--ease)}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--color-gold);transition:width .35s var(--ease)}
+    .nav-links a:hover{color:var(--color-gold-light)}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-links a.active{color:var(--color-gold)}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;width:28px;z-index:1001}
+    .nav-hamburger span{display:block;height:1px;background:var(--color-gold);transition:.35s var(--ease)}
+    .nav-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+    .nav-hamburger.open span:nth-child(2){opacity:0}
+    .nav-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+    .nav-overlay{position:fixed;inset:0;background:rgba(14,10,7,.97);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;opacity:0;pointer-events:none;transition:opacity .6s var(--ease)}
+    .nav-overlay.open{opacity:1;pointer-events:all}
+    .nav-overlay a{font-family:var(--font-heading);font-size:2.5rem;color:var(--color-cream);transition:color .35s var(--ease)}
+    .nav-overlay a:hover{color:var(--color-gold)}
+
+    /* Scroll reveal */
+    .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}.reveal-delay-5{transition-delay:.5s}
+
+    /* Shared utilities */
+    .gold-rule{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--color-gold),transparent);margin:20px 0}
+    .section{padding:100px 60px;position:relative}
+    .section-inner{max-width:1280px;margin:0 auto}
+    .section-label{font-family:var(--font-display);font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:var(--color-gold);margin-bottom:20px}
+    .btn{display:inline-block;padding:14px 36px;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;transition:.35s var(--ease);position:relative;overflow:hidden}
+    .btn-gold{background:var(--color-gold);color:var(--color-bg);font-weight:500}
+    .btn-gold::before{content:'';position:absolute;inset:0;background:var(--color-gold-light);transform:translateX(-100%);transition:transform .35s var(--ease)}
+    .btn-gold:hover::before{transform:translateX(0)}
+    .btn-gold:hover{box-shadow:0 0 30px rgba(201,168,76,.4);transform:translateY(-2px)}
+    .btn-gold span{position:relative;z-index:1}
+    .btn-outline{border:1px solid var(--color-gold);color:var(--color-gold);background:transparent}
+    .btn-outline:hover{background:var(--color-gold);color:var(--color-bg);box-shadow:0 0 20px rgba(201,168,76,.3);transform:translateY(-2px)}
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:9000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
+    .lightbox.open{opacity:1;pointer-events:all}
+    .lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border:1px solid var(--color-border)}
+    .lightbox-close{position:absolute;top:30px;right:40px;font-size:1.8rem;color:var(--color-gold);transition:color .35s var(--ease);line-height:1}
+    .lightbox-close:hover{color:var(--color-gold-light)}
+
+    /* Press ticker */
+    .press-ticker{overflow:hidden;white-space:nowrap;padding:18px 0;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)}
+    .press-ticker-inner{display:inline-flex;animation:ticker 30s linear infinite}
+    .press-ticker-inner span{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--color-text-muted);padding:0 28px}
+    .press-ticker-inner .sep{color:var(--color-gold);padding:0 4px}
+    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* Contact bar */
+    .contact-bar{background:var(--color-surface);border-top:1px solid var(--color-border);padding:80px 60px;text-align:center}
+    .contact-bar-quote{font-family:var(--font-heading);font-style:italic;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--color-cream);margin-bottom:36px;line-height:1.4}
+
+    /* Footer */
+    .footer{background:var(--color-bg);border-top:1px solid var(--color-border);padding:48px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
+    .footer-copy{font-size:.72rem;letter-spacing:.12em;color:var(--color-text-muted)}
+    .footer-socials{display:flex;gap:24px}
+    .footer-socials a{color:var(--color-text-muted);transition:color .35s var(--ease);line-height:1}
+    .footer-socials a:hover{color:var(--color-gold)}
+    .footer-socials svg{width:18px;height:18px;fill:currentColor}
+
+    /* Stats */
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--color-border)}
+    .stat-item{background:var(--color-bg-alt);padding:60px 40px;text-align:center;position:relative;overflow:hidden}
+    .stat-item::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(201,168,76,.04))}
+    .stat-number{font-family:var(--font-heading);font-size:clamp(2.8rem,4.5vw,4.5rem);color:var(--color-gold);line-height:1;margin-bottom:12px}
+    .stat-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--color-text-muted)}
+
+    /* Brand cards */
+    .brand-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--color-border);margin-top:60px}
+    .brand-card{background:var(--color-surface);padding:52px 36px;position:relative;overflow:hidden;transition:.35s var(--ease)}
+    .brand-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;transition:height .6s var(--ease)}
+    .brand-card:hover::before{height:100%}
+    .brand-card:hover{background:var(--color-bg-alt)}
+    .brand-card--fashion::before{background:var(--color-jewel-1)}
+    .brand-card--shea::before{background:var(--color-earth-1)}
+    .brand-card--finance::before{background:var(--color-jewel-2)}
+    .brand-card--more::before{background:#3a3530}
+    .brand-card-label{font-family:var(--font-display);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:20px}
+    .brand-card--fashion .brand-card-label{color:#a05070}
+    .brand-card--shea .brand-card-label{color:var(--color-earth-1)}
+    .brand-card--finance .brand-card-label{color:#4a6a8f}
+    .brand-card--more .brand-card-label{color:var(--color-text-muted)}
+    .brand-card-title{font-family:var(--font-display);font-size:.88rem;letter-spacing:.1em;color:var(--color-cream);margin-bottom:16px;line-height:1.5}
+    .brand-card-desc{font-size:.84rem;color:var(--color-text-muted);line-height:1.75;margin-bottom:32px}
+    .coming-soon-badge{display:inline-block;padding:6px 16px;border:1px solid var(--color-border);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--color-text-muted)}
+
+    /* ============================================================
+       INDEX PAGE
+    ============================================================ */
+    .hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center top;background-repeat:no-repeat;transform:scale(1.08);will-change:transform}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(14,10,7,.25) 0%,rgba(14,10,7,.15) 40%,rgba(14,10,7,.6) 80%,rgba(14,10,7,.9) 100%)}
+    .hero-content{position:relative;z-index:1;text-align:center;padding:0 24px}
+    .hero-eyebrow{font-family:var(--font-display);font-size:clamp(.58rem,1.1vw,.75rem);letter-spacing:.4em;text-transform:uppercase;color:var(--color-gold);margin-bottom:20px}
+    .hero-name{font-family:var(--font-heading);font-size:clamp(4rem,10vw,9rem);font-weight:300;color:var(--color-cream);line-height:.95;margin-bottom:24px}
+    .hero-rule{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--color-gold),transparent);margin:0 auto 24px}
+    .hero-sub{font-size:clamp(.78rem,1.4vw,.95rem);letter-spacing:.18em;color:var(--color-text-muted);text-transform:uppercase}
+    .hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;animation:scroll-bounce 2s ease-in-out infinite}
+    .hero-scroll-label{font-family:var(--font-display);font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:var(--color-gold)}
+    .hero-scroll-chevron{color:var(--color-gold);opacity:.7}
+    .hero-scroll-chevron svg{width:20px;height:20px}
+    @keyframes scroll-bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+    .story-section{background:var(--color-bg-alt)}
+    .story-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start}
+    .story-jewel-bar{width:3px;height:60px;background:linear-gradient(to bottom,var(--color-jewel-1),transparent);margin-bottom:32px}
+    .story-pull-quote{font-family:var(--font-heading);font-style:italic;font-size:clamp(1.6rem,3vw,2.6rem);color:var(--color-cream);line-height:1.35;font-weight:300;margin-bottom:20px}
+    .story-attribution{font-family:var(--font-display);font-size:.63rem;letter-spacing:.25em;text-transform:uppercase;color:var(--color-gold)}
+    .story-bio{font-size:.95rem;color:var(--color-text);line-height:1.85;font-weight:300}
+
+    .brands-heading{font-family:var(--font-heading);font-size:clamp(2rem,4vw,3.5rem);color:var(--color-cream);line-height:1.2;font-weight:300}
+
+    /* ============================================================
+       FASHION PAGE
+    ============================================================ */
+    .fashion-hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .fashion-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 25%;background-repeat:no-repeat}
+    .fashion-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(107,45,62,.45) 0%,rgba(14,10,7,.4) 40%,rgba(14,10,7,.75) 100%)}
+    .fashion-hero-content{position:relative;z-index:1;text-align:center;padding:0 24px}
+    .fashion-hero-title{font-family:var(--font-heading);font-size:clamp(3.5rem,9vw,8rem);font-weight:300;color:var(--color-cream);line-height:1;margin-bottom:24px}
+    .fashion-hero-sub{font-size:clamp(.73rem,1.3vw,.9rem);letter-spacing:.2em;color:var(--color-text-muted);text-transform:uppercase}
+
+    .designer-section{background:var(--color-bg-alt)}
+    .designer-inner{display:grid;grid-template-columns:1.2fr 0.8fr;gap:80px;align-items:center}
+    .designer-heading{font-family:var(--font-heading);font-size:clamp(2.2rem,4vw,3.8rem);color:var(--color-cream);font-weight:300;line-height:1.15;margin-bottom:20px}
+    .designer-body{font-size:.95rem;color:var(--color-text);line-height:1.85;font-weight:300}
+    .designer-body em{font-style:italic;color:var(--color-cream)}
+    .designer-portrait-frame{position:relative}
+    .designer-portrait-frame img{width:100%;height:600px;object-fit:cover;object-position:top;border:1px solid var(--color-border)}
+    .designer-portrait-accent{position:absolute;top:-12px;right:-12px;width:60%;height:60%;border-top:2px solid var(--color-jewel-1);border-right:2px solid var(--color-jewel-1);pointer-events:none}
+
+    .gallery-section{background:var(--color-bg);padding:80px 0;overflow:hidden}
+    .gallery-label-row{display:flex;align-items:center;justify-content:space-between;padding:0 60px;margin-bottom:40px}
+    .gallery-hint{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--color-text-muted)}
+    .marquee-row{overflow:hidden;margin-bottom:16px}
+    .marquee-track{display:flex;gap:16px;will-change:transform}
+    .marquee-left{animation:marquee-left 45s linear infinite}
+    .marquee-right{animation:marquee-right 36s linear infinite}
+    @keyframes marquee-left{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    @keyframes marquee-right{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+    .gallery-photo{height:380px;width:auto;min-width:220px;object-fit:cover;flex-shrink:0;border:1px solid var(--color-border);transition:transform .35s ease,box-shadow .35s ease}
+    .gallery-photo:hover{transform:scale(1.03);box-shadow:0 0 24px rgba(201,168,76,.25);z-index:1;position:relative}
+
+    .services-section{background:var(--color-bg-alt)}
+    .services-heading{font-family:var(--font-heading);font-size:clamp(1.8rem,3.5vw,3rem);color:var(--color-cream);font-weight:300;margin-bottom:60px;line-height:1.2}
+    .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--color-border)}
+    .service-card{background:var(--color-surface);padding:44px 32px;transition:background .35s var(--ease);position:relative}
+    .service-card::after{content:'';position:absolute;bottom:0;left:32px;right:32px;height:1px;background:linear-gradient(90deg,var(--color-jewel-1),transparent);opacity:0;transition:opacity .35s var(--ease)}
+    .service-card:hover{background:var(--color-bg-alt)}
+    .service-card:hover::after{opacity:1}
+    .service-num{font-family:var(--font-heading);font-size:2.5rem;color:var(--color-border);line-height:1;margin-bottom:16px;display:block}
+    .service-title{font-family:var(--font-display);font-size:.7rem;letter-spacing:.15em;color:var(--color-cream);margin-bottom:14px;text-transform:uppercase}
+    .service-desc{font-size:.84rem;color:var(--color-text-muted);line-height:1.7}
+
+    .press-section{background:var(--color-bg)}
+    .press-heading{font-family:var(--font-heading);font-size:clamp(2rem,4vw,3.5rem);color:var(--color-cream);font-weight:300;margin-bottom:48px}
+    .press-featured{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--color-border);margin-bottom:40px}
+    .press-hero-feature{background:var(--color-surface);padding:52px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .press-hero-name{font-family:var(--font-heading);font-size:clamp(1.4rem,2.5vw,2rem);color:var(--color-cream);font-style:italic}
+    .press-hero-badge{font-family:var(--font-display);font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--color-gold);border:1px solid var(--color-gold);padding:5px 14px;white-space:nowrap}
+    .press-nyfw{background:var(--color-bg-alt);padding:52px 48px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+    .press-nyfw-label{font-family:var(--font-display);font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--color-text-muted)}
+    .press-nyfw-name{font-family:var(--font-heading);font-size:clamp(1.2rem,2.2vw,1.8rem);color:var(--color-cream)}
+    .press-list{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+    .press-list span{font-size:.85rem;color:var(--color-text-muted)}
+    .press-list .sep{color:var(--color-gold)}
+
+    /* ============================================================
+       SHEA PAGE
+    ============================================================ */
+    .shea-hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .shea-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat}
+    .shea-hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(139,69,19,.5) 0%,rgba(14,10,7,.45) 45%,rgba(14,10,7,.85) 100%)}
+    .shea-hero-content{position:relative;z-index:1;text-align:center;padding:0 24px}
+    .shea-eyebrow{font-family:var(--font-display);font-size:clamp(.56rem,1.1vw,.73rem);letter-spacing:.4em;text-transform:uppercase;color:var(--color-gold);margin-bottom:20px}
+    .shea-hero-title{font-family:var(--font-heading);font-size:clamp(3.5rem,9vw,8rem);font-weight:300;color:var(--color-cream);line-height:1;margin-bottom:24px}
+    .shea-hero-rule{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--color-gold),transparent);margin:0 auto 24px}
+    .shea-hero-sub{font-size:clamp(.73rem,1.3vw,.9rem);letter-spacing:.2em;color:var(--color-text-muted);text-transform:uppercase}
+
+    .shea-origin{background:var(--color-bg-alt)}
+    .shea-origin-inner{display:grid;grid-template-columns:1.3fr 0.7fr;gap:80px;align-items:center}
+    .shea-origin-heading{font-family:var(--font-heading);font-size:clamp(1.6rem,3vw,2.6rem);color:var(--color-cream);font-weight:300;line-height:1.25;margin-bottom:24px}
+    .shea-origin-body{font-size:.95rem;color:var(--color-text);line-height:1.85;font-weight:300}
+    .shea-label-art{border:1px solid var(--color-border);background:#1a0f05;padding:20px;margin-bottom:24px}
+    .shea-label-art img{width:100%;mix-blend-mode:screen}
+    .shea-origin-accent{font-family:var(--font-heading);font-style:italic;font-size:1.4rem;color:var(--color-earth-1);line-height:1.3;text-align:center}
+
+    .shea-product{background:var(--color-bg)}
+    .shea-product-heading{font-family:var(--font-heading);font-size:clamp(1.8rem,3.5vw,3rem);color:var(--color-cream);font-weight:300;line-height:1.2;margin-bottom:60px}
+    .shea-benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--color-border)}
+    .shea-benefit-card{background:var(--color-surface);padding:52px 40px;transition:background .35s var(--ease);position:relative;overflow:hidden}
+    .shea-benefit-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;transition:height .6s var(--ease)}
+    .shea-benefit--hair::before{background:var(--color-earth-1)}
+    .shea-benefit--body::before{background:var(--color-earth-2)}
+    .shea-benefit--scent::before{background:var(--color-gold)}
+    .shea-benefit-card:hover{background:var(--color-bg-alt)}
+    .shea-benefit-card:hover::before{height:100%}
+    .shea-benefit-icon{color:var(--color-gold);margin-bottom:24px;width:40px;height:40px}
+    .shea-benefit-title{font-family:var(--font-display);font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--color-cream);margin-bottom:20px}
+    .shea-benefit-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .shea-benefit-list li{font-size:.88rem;color:var(--color-text-muted);line-height:1.6;padding-left:16px;position:relative}
+    .shea-benefit-list li::before{content:'◆';position:absolute;left:0;color:var(--color-gold);font-size:.42rem;top:6px}
+    .shea-benefit-desc{font-size:.9rem;color:var(--color-text-muted);line-height:1.75;font-style:italic}
+
+    .shea-order{background:var(--color-bg-alt)}
+    .shea-order-heading{font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,2rem);letter-spacing:.1em;color:var(--color-cream);margin-bottom:20px}
+    .shea-order-content{max-width:720px}
+    .shea-order-intro{font-size:1rem;color:var(--color-text);line-height:1.8;margin-bottom:44px}
+    .shea-order-card{background:var(--color-surface);border:1px solid var(--color-border);padding:48px;margin-bottom:36px;display:flex;flex-direction:column;gap:32px}
+    .shea-order-step{display:flex;gap:24px;align-items:flex-start}
+    .shea-order-step-num{font-family:var(--font-heading);font-size:2.5rem;color:var(--color-gold);line-height:1;flex-shrink:0;width:32px}
+    .shea-order-step p{font-size:.95rem;color:var(--color-text);line-height:1.7;padding-top:8px}
+    .shea-order-step p strong{color:var(--color-cream);font-weight:500}
+    .shea-order-note{font-family:var(--font-heading);font-style:italic;font-size:1rem;color:var(--color-text-muted);line-height:1.6}
+
+    /* ============================================================
+       PAGE TABS (single-page navigation)
+    ============================================================ */
+    .page{display:none}
+    .page.active{display:block}
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media(max-width:1199px){
+      .section{padding:80px 40px}
+      .nav{padding:24px 40px}
+      .nav.scrolled{padding:16px 40px}
+      .stats-grid,.brand-cards{grid-template-columns:repeat(2,1fr)}
+      .story-inner,.designer-inner,.shea-origin-inner{grid-template-columns:1fr;gap:48px}
+      .services-grid{grid-template-columns:repeat(2,1fr)}
+      .press-featured{grid-template-columns:1fr}
+      .shea-benefits-grid{grid-template-columns:1fr}
+      .gallery-label-row{padding:0 40px}
+    }
+    @media(max-width:767px){
+      .section{padding:60px 24px}
+      .nav{padding:20px 24px}
+      .nav.scrolled{padding:14px 24px}
+      .nav-links{display:none}
+      .nav-hamburger{display:flex}
+      .stats-grid{grid-template-columns:repeat(2,1fr)}
+      .brand-cards,.services-grid,.shea-benefits-grid{grid-template-columns:1fr}
+      .contact-bar{padding:60px 24px}
+      .footer{padding:40px 24px;flex-direction:column;text-align:center}
+      .stat-item{padding:40px 20px}
+      .gallery-photo{height:260px;min-width:160px}
+      .gallery-label-row{padding:0 24px;flex-direction:column;align-items:flex-start;gap:8px}
+      .designer-portrait-frame img{height:400px}
+      .press-hero-feature{flex-direction:column;align-items:flex-start;padding:36px 28px}
+      .press-nyfw{padding:36px 28px}
+      .shea-order-card{padding:32px 24px}
+      .lightbox-close{top:16px;right:20px}
+      .hero-name{font-size:clamp(3rem,14vw,5rem)}
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" role="button">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <button class="nav-logo" onclick="showPage('home')">Virginia Cathey</button>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home');return false" id="nav-home" class="active">Home</a></li>
+      <li><a href="#" onclick="showPage('fashion');return false" id="nav-fashion">Fashion</a></li>
+      <li><a href="#" onclick="showPage('shea');return false" id="nav-shea">Shea &amp; Shades</a></li>
+      <li><a href="#" onclick="showPage('home');setTimeout(()=>document.getElementById('connect').scrollIntoView({behavior:'smooth'}),100);return false">Connect</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-overlay" id="nav-overlay">
+    <a href="#" onclick="showPage('home');closeMenu();return false">Home</a>
+    <a href="#" onclick="showPage('fashion');closeMenu();return false">Fashion</a>
+    <a href="#" onclick="showPage('shea');closeMenu();return false">Shea &amp; Shades</a>
+    <a href="#" onclick="showPage('home');closeMenu();setTimeout(()=>document.getElementById('connect').scrollIntoView({behavior:'smooth'}),100);return false">Connect</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       HOME PAGE
+  ══════════════════════════════════════════════ -->
+  <div class="page active" id="page-home">
+
+    <section class="hero">
+      <div class="hero-bg" id="hero-parallax" style="background-image:url('assets/images/HERO.jpeg')"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow reveal">Welcome to the World of</p>
+        <h1 class="hero-name reveal reveal-delay-2">Virginia Cathey</h1>
+        <div class="hero-rule reveal reveal-delay-3"></div>
+        <p class="hero-sub reveal reveal-delay-4">Designer. Creator. Visionary. Straight out the womb.</p>
+      </div>
+      <div class="hero-scroll">
+        <span class="hero-scroll-label">Scroll</span>
+        <div class="hero-scroll-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="section story-section">
+      <div class="section-inner story-inner">
+        <div class="reveal">
+          <div class="story-jewel-bar"></div>
+          <blockquote class="story-pull-quote">"When they ask how long I've been doing this — I say straight out the womb."</blockquote>
+          <p class="story-attribution">— Virginia Cathey</p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <p class="section-label">Her Story</p>
+          <p class="story-bio">Virginia Cathey, founder of Virginia Cathey Collections, is a Brooklyn-born fashion designer, entrepreneur, and creative visionary with over 40 years of sewing, tailoring, and fashion expertise. Known for her signature hooded bodysuits, reversible garments, and wearable couture designs, Virginia has been featured in more than 60 publications, including Harper's Bazaar Vietnam and Style &amp; Soul Magazine, and has showcased her collections during New York Fashion Week.</p>
+          <br>
+          <p class="story-bio">As her own seamstress, tailor, stylist, and promoter, she creates versatile designs ranging from ready-to-wear and business attire to red carpet, bridal, eveningwear, and custom couture for women of all sizes and backgrounds. Her work blends elegance, confidence, functionality, and individuality, making luxury fashion feel both empowering and accessible.</p>
+          <br>
+          <p class="story-bio">Beyond fashion, Virginia brings over 20 years of executive-level operations and event management experience, more than 10 years developing sought-after shea butter wellness products, and years in financial education. Her mission remains the same: to inspire confidence, provide value, and leave a lasting impression through excellence and authenticity.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background:var(--color-bg)">
+      <div class="section-inner">
+        <div class="reveal">
+          <p class="section-label">Her World</p>
+          <h2 class="brands-heading">Four Worlds.<br>One Vision.</h2>
+        </div>
+        <div class="brand-cards reveal reveal-delay-2">
+          <div class="brand-card brand-card--fashion">
+            <p class="brand-card-label">Fashion Design</p>
+            <h3 class="brand-card-title">Virginia Cathey Collection</h3>
+            <p class="brand-card-desc">Over four decades of couture mastery — from Brooklyn streets to international runways. Hooded bodysuits, bridal gowns, red carpet, ready-to-wear. For every woman.</p>
+            <button class="btn btn-gold" onclick="showPage('fashion')"><span>Explore Fashion</span></button>
+          </div>
+          <div class="brand-card brand-card--shea">
+            <p class="brand-card-label">Natural Beauty</p>
+            <h3 class="brand-card-title">Shea &amp; Shades</h3>
+            <p class="brand-card-desc">Born in her kitchen, perfected over 20 years. An organic shea butter blend that reverses damage, nourishes deeply, and smells like nothing else on earth.</p>
+            <button class="btn btn-gold" onclick="showPage('shea')"><span>Discover Shea &amp; Shades</span></button>
+          </div>
+          <div class="brand-card brand-card--finance">
+            <p class="brand-card-label">Financial Education</p>
+            <h3 class="brand-card-title">Financial Education &amp; Empowerment</h3>
+            <p class="brand-card-desc">Virginia brings years of financial education experience, empowering clients to build security and confidence with their finances.</p>
+            <span class="coming-soon-badge">Coming Soon</span>
+          </div>
+          <div class="brand-card brand-card--more">
+            <p class="brand-card-label">And Beyond</p>
+            <h3 class="brand-card-title">More from Virginia's World</h3>
+            <p class="brand-card-desc">Event production. Beauty pageants. Original fabric design. Creative direction. There is always more in motion.</p>
+            <span class="coming-soon-badge">Stay Tuned</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number count-up" data-target="40" data-suffix="+">0+</div>
+        <p class="stat-label">Years of Fashion Mastery</p>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number count-up" data-target="60" data-suffix="+">0+</div>
+        <p class="stat-label">Press Features &amp; Publications</p>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-number count-up" data-target="20" data-suffix="+">0+</div>
+        <p class="stat-label">Years of Natural Hair &amp; Body Care</p>
+      </div>
+      <div class="stat-item reveal reveal-delay-4">
+        <div class="stat-number">∞</div>
+        <p class="stat-label">Generations of Creative Legacy</p>
+      </div>
+    </section>
+
+    <div class="press-ticker">
+      <div class="press-ticker-inner">
+        <span>Harper's Bazaar Vietnam</span><span class="sep">◆</span><span>Style &amp; Soul Magazine</span><span class="sep">◆</span><span>New York Fashion Week</span><span class="sep">◆</span><span>60+ Publications</span><span class="sep">◆</span><span>And Counting</span><span class="sep">◆</span>
+        <span>Harper's Bazaar Vietnam</span><span class="sep">◆</span><span>Style &amp; Soul Magazine</span><span class="sep">◆</span><span>New York Fashion Week</span><span class="sep">◆</span><span>60+ Publications</span><span class="sep">◆</span><span>And Counting</span><span class="sep">◆</span>
+      </div>
+    </div>
+
+    <section class="contact-bar" id="connect">
+      <p class="contact-bar-quote">"Let's create something extraordinary together."</p>
+      <a href="mailto:virginiacathycollections@gmail.com" class="btn btn-gold"><span>Get In Touch</span></a>
+    </section>
+
+    <footer class="footer">
+      <p class="footer-copy">Virginia Cathey Collections &copy; 2025. Brooklyn, New York.</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/virginiacatheycollections" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="https://www.facebook.com/share/1MAkK8qsHK/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://www.tiktok.com/@virginiacathey" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       FASHION PAGE
+  ══════════════════════════════════════════════ -->
+  <div class="page" id="page-fashion">
+
+    <section class="fashion-hero">
+      <div class="fashion-hero-bg" id="fashion-parallax" style="background-image:url('assets/images/IMG_3991.JPG')"></div>
+      <div class="fashion-hero-overlay"></div>
+      <div class="fashion-hero-content">
+        <p class="hero-eyebrow reveal">The Collection</p>
+        <h1 class="fashion-hero-title reveal reveal-delay-2">Virginia Cathey<br>Collection</h1>
+        <p class="fashion-hero-sub reveal reveal-delay-3">Couture. Ready-to-Wear. Bridal. Eveningwear. For every woman.</p>
+      </div>
+    </section>
+
+    <section class="section designer-section">
+      <div class="section-inner designer-inner">
+        <div class="reveal">
+          <p class="section-label">The Designer</p>
+          <h2 class="designer-heading">Born to Create</h2>
+          <div class="gold-rule"></div>
+          <p class="designer-body">Fashion has been in her family for generations. Born and raised in Brooklyn, NY, Virginia grew up surrounded by creators — her mother, her grandmother, an artistic family touching every art imaginable. When people ask how long she's been designing, her answer is immediate: <em>"Straight out the womb."</em></p>
+          <br>
+          <p class="designer-body">She created her entire wedding wardrobe herself. That same devotion — to the most important moments in a woman's life — has driven her work ever since. From hosting and planning multiple beauty pageants and fashion shows featuring original designs, to creating her own original fabric prints, Virginia's creative vision is singular and relentless.</p>
+          <br>
+          <p class="designer-body">Her core values are immovable: supportive energy, and excellence as the baseline — she always goes above it.</p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="designer-portrait-frame">
+            <img src="assets/images/IMG_6523.jpeg" alt="Virginia Cathey — fashion designer" loading="lazy">
+            <div class="designer-portrait-accent"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="gallery">
+      <div class="gallery-label-row reveal">
+        <p class="section-label">The Work</p>
+        <p class="gallery-hint">Click any photo to enlarge &nbsp;·&nbsp; Hover to pause</p>
+      </div>
+      <div class="marquee-row">
+        <div class="marquee-track marquee-left">
+          <img class="gallery-photo" src="assets/images/IMG_3991.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_5039.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_4577.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_4434.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_4264.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_3753.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_3337.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_2475.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_3991.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_5039.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_4577.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_4434.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_4264.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_3753.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_3337.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_2475.JPG" alt="Virginia Cathey design" loading="lazy">
+        </div>
+      </div>
+      <div class="marquee-row">
+        <div class="marquee-track marquee-right">
+          <img class="gallery-photo" src="assets/images/1a65c8bd-0a94-4dd0-aaab-ecb6b0c3fd19.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_8191.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_3594.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_3494.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_1835.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_1776.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_1620.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_1613.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/1a65c8bd-0a94-4dd0-aaab-ecb6b0c3fd19.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_8191.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_3594.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_3494.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_1835.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_1776.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_1620.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_1613.jpeg" alt="Virginia Cathey design" loading="lazy">
+        </div>
+      </div>
+      <div class="marquee-row">
+        <div class="marquee-track marquee-left" style="animation-duration:55s">
+          <img class="gallery-photo" src="assets/images/IMG_1801.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_4974.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_0297.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_3575.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/C0E4E6DD-88C8-44FE-81A4-0004A0794B04.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/8346041771743793870.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_1801.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_4974.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_0297.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/IMG_3575.jpeg" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/C0E4E6DD-88C8-44FE-81A4-0004A0794B04.JPG" alt="Virginia Cathey design" loading="lazy">
+          <img class="gallery-photo" src="assets/images/8346041771743793870.JPG" alt="Virginia Cathey design" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="section services-section">
+      <div class="section-inner">
+        <div class="reveal">
+          <p class="section-label">What She Creates</p>
+          <h2 class="services-heading">Every occasion.<br>Every woman.</h2>
+        </div>
+        <div class="services-grid reveal reveal-delay-2">
+          <div class="service-card"><span class="service-num">01</span><h3 class="service-title">Custom Couture</h3><p class="service-desc">One-of-a-kind creations designed and built entirely by Virginia, from concept to final fitting.</p></div>
+          <div class="service-card"><span class="service-num">02</span><h3 class="service-title">Bridal &amp; Wedding</h3><p class="service-desc">She designed her own wedding gown. She'll bring that same devotion to your most important day.</p></div>
+          <div class="service-card"><span class="service-num">03</span><h3 class="service-title">Ready-to-Wear</h3><p class="service-desc">Elevated everyday pieces — functional, bold, reversible, wearable. Virginia's signature versatility.</p></div>
+          <div class="service-card"><span class="service-num">04</span><h3 class="service-title">Business Attire</h3><p class="service-desc">Power dressing redefined. Structured elegance for the woman who commands every room.</p></div>
+          <div class="service-card"><span class="service-num">05</span><h3 class="service-title">Red Carpet &amp; Eveningwear</h3><p class="service-desc">Dramatic. Sculptural. Unforgettable. Designs that make every entrance a statement.</p></div>
+          <div class="service-card"><span class="service-num">06</span><h3 class="service-title">Original Fabric Design</h3><p class="service-desc">Virginia doesn't just design garments — she designs the fabric they're made from.</p></div>
+          <div class="service-card"><span class="service-num">07</span><h3 class="service-title">Beauty Pageant Styling</h3><p class="service-desc">Years of pageant production experience — dressing contestants and creating the looks that win stages.</p></div>
+          <div class="service-card"><span class="service-num">08</span><h3 class="service-title">Fashion Show Production</h3><p class="service-desc">Full end-to-end production — concept, casting, styling, show flow. Virginia has produced multiple original runway shows.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section press-section">
+      <div class="section-inner">
+        <div class="reveal">
+          <p class="section-label">Press &amp; Recognition</p>
+          <h2 class="press-heading">As Seen In</h2>
+        </div>
+        <div class="press-featured reveal reveal-delay-2">
+          <div class="press-hero-feature">
+            <span class="press-hero-name">Harper's Bazaar Vietnam</span>
+            <span class="press-hero-badge">Featured</span>
+          </div>
+          <div class="press-nyfw">
+            <span class="press-nyfw-label">Presented at</span>
+            <span class="press-nyfw-name">New York Fashion Week</span>
+          </div>
+        </div>
+        <div class="press-list reveal reveal-delay-3">
+          <span>Style &amp; Soul Magazine</span><span class="sep">·</span><span>60+ Publications</span><span class="sep">·</span><span>International Features</span><span class="sep">·</span><span>And Counting</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="press-ticker">
+      <div class="press-ticker-inner">
+        <span>Harper's Bazaar Vietnam</span><span class="sep">◆</span><span>Style &amp; Soul Magazine</span><span class="sep">◆</span><span>New York Fashion Week</span><span class="sep">◆</span><span>60+ Publications</span><span class="sep">◆</span>
+        <span>Harper's Bazaar Vietnam</span><span class="sep">◆</span><span>Style &amp; Soul Magazine</span><span class="sep">◆</span><span>New York Fashion Week</span><span class="sep">◆</span><span>60+ Publications</span><span class="sep">◆</span>
+      </div>
+    </div>
+
+    <section class="contact-bar">
+      <p class="contact-bar-quote">"Let's create something extraordinary together."</p>
+      <a href="mailto:virginiacathycollections@gmail.com" class="btn btn-gold"><span>Get In Touch</span></a>
+    </section>
+
+    <footer class="footer">
+      <p class="footer-copy">Virginia Cathey Collections &copy; 2025. Brooklyn, New York.</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/virginiacatheycollections" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="https://www.facebook.com/share/1MAkK8qsHK/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://www.tiktok.com/@virginiacathey" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SHEA PAGE
+  ══════════════════════════════════════════════ -->
+  <div class="page" id="page-shea">
+
+    <section class="shea-hero">
+      <div class="shea-hero-bg" id="shea-parallax" style="background-image:url('assets/images/IMG_4974.jpeg')"></div>
+      <div class="shea-hero-overlay"></div>
+      <div class="shea-hero-content">
+        <p class="shea-eyebrow reveal">Handcrafted Shade Butter</p>
+        <h1 class="shea-hero-title reveal reveal-delay-2">Shea &amp; Shades</h1>
+        <div class="shea-hero-rule reveal reveal-delay-3"></div>
+        <p class="shea-hero-sub reveal reveal-delay-4">Born from necessity. Refined by nature. Trusted by results.</p>
+      </div>
+    </section>
+
+    <section class="section shea-origin">
+      <div class="section-inner shea-origin-inner">
+        <div class="reveal">
+          <p class="section-label">The Origin</p>
+          <h2 class="shea-origin-heading">Twenty years ago, Virginia wasn't trying to start a business.</h2>
+          <div class="gold-rule"></div>
+          <p class="shea-origin-body">She was trying to save her hair. Years of chemical straighteners and perms had taken their toll, causing significant hair loss. Rather than accept the damage, she turned inward — and to nature.</p>
+          <br>
+          <p class="shea-origin-body">She began blending organic butters and oils by hand, experimenting until the formula felt right. People noticed the smell first. They always do — rich, warm, natural, unmistakable. Then came the questions: what are you using? What is that in your hair?</p>
+          <br>
+          <p class="shea-origin-body">And then came the moment she never expected. The years of damage — the breakage, the thinning, the chemical scarring — slowly, quietly reversing. The blend was working.</p>
+          <br>
+          <p class="shea-origin-body">What started in her kitchen, passed between family and friends, has quietly grown into something people swear by. Not just for hair. For skin. For body. For everything it touches. Small operation. Intentional growth. The same love in every jar.</p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="shea-label-art">
+            <img src="assets/logos/shea-label.jpg" alt="Shea & Shades product label" loading="lazy">
+          </div>
+          <p class="shea-origin-accent">Brooklyn<br>New York</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shea-product">
+      <div class="section-inner">
+        <div class="reveal">
+          <p class="section-label">The Product</p>
+          <h2 class="shea-product-heading">What it does.<br>Why it works.</h2>
+        </div>
+        <div class="shea-benefits-grid reveal reveal-delay-2">
+          <div class="shea-benefit-card shea-benefit--hair">
+            <div class="shea-benefit-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1"/><path d="M20 10 C14 14 12 20 15 26 C18 32 22 30 20 24 C18 18 22 16 20 10Z" fill="currentColor" opacity="0.5"/></svg></div>
+            <h3 class="shea-benefit-title">For Your Hair</h3>
+            <ul class="shea-benefit-list">
+              <li>Reverses chemical damage from relaxers &amp; perms</li>
+              <li>Promotes new growth from the root</li>
+              <li>Deeply nourishes and moisturizes</li>
+              <li>Reduces breakage and thinning</li>
+              <li>Restores natural luster and softness</li>
+            </ul>
+          </div>
+          <div class="shea-benefit-card shea-benefit--body">
+            <div class="shea-benefit-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1"/><ellipse cx="20" cy="20" rx="7" ry="11" fill="currentColor" opacity="0.4"/><path d="M13 20 Q20 26 27 20" stroke="currentColor" stroke-width="1" fill="none"/></svg></div>
+            <h3 class="shea-benefit-title">For Your Body</h3>
+            <ul class="shea-benefit-list">
+              <li>Rejuvenates and revitalizes skin</li>
+              <li>Deep hydration that lasts</li>
+              <li>Restores suppleness and elasticity</li>
+              <li>Soothes dry, sensitive, and damaged skin</li>
+              <li>Works on every skin tone</li>
+            </ul>
+          </div>
+          <div class="shea-benefit-card shea-benefit--scent">
+            <div class="shea-benefit-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1"/><path d="M14 28 Q16 20 20 18 Q24 16 26 12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M17 28 Q19 22 20 20 Q22 18 23 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/></svg></div>
+            <h3 class="shea-benefit-title">The Signature Scent</h3>
+            <p class="shea-benefit-desc">People notice the smell first. They always do. Rich, warm, natural, unmistakable — a scent that tells the story of every organic ingredient before you've even seen the jar. There is nothing else like it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shea-order" id="order">
+      <div class="section-inner">
+        <div class="reveal">
+          <p class="section-label">Order Yours</p>
+          <h2 class="shea-order-heading">Ready to Experience It?</h2>
+          <div class="gold-rule"></div>
+        </div>
+        <div class="shea-order-content reveal reveal-delay-2">
+          <p class="shea-order-intro">Shea &amp; Shades is available for direct order. Simply send a text to Virginia's business line to get started.</p>
+          <div class="shea-order-card">
+            <div class="shea-order-step"><span class="shea-order-step-num">1</span><p>Text <strong>"Interested in the shea butter"</strong> to Virginia's business line</p></div>
+            <div class="shea-order-step"><span class="shea-order-step-num">2</span><p>Include your <strong>name and phone number</strong> in the message</p></div>
+            <div class="shea-order-step"><span class="shea-order-step-num">3</span><p>Virginia will <strong>follow up personally</strong> with available sizes and current pricing</p></div>
+          </div>
+          <p class="shea-order-note">Every order is handled personally by Virginia. Small batch. Intentional. Made with love.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="press-ticker">
+      <div class="press-ticker-inner">
+        <span>Shea &amp; Shades</span><span class="sep">◆</span><span>Handcrafted in Brooklyn</span><span class="sep">◆</span><span>Organic Butter &amp; Oil Blend</span><span class="sep">◆</span><span>20 Years in the Making</span><span class="sep">◆</span><span>Hair · Skin · Body</span><span class="sep">◆</span>
+        <span>Shea &amp; Shades</span><span class="sep">◆</span><span>Handcrafted in Brooklyn</span><span class="sep">◆</span><span>Organic Butter &amp; Oil Blend</span><span class="sep">◆</span><span>20 Years in the Making</span><span class="sep">◆</span><span>Hair · Skin · Body</span><span class="sep">◆</span>
+      </div>
+    </div>
+
+    <section class="contact-bar">
+      <p class="contact-bar-quote">"Let's create something extraordinary together."</p>
+      <a href="mailto:virginiacathycollections@gmail.com" class="btn btn-gold"><span>Get In Touch</span></a>
+    </section>
+
+    <footer class="footer">
+      <p class="footer-copy">Virginia Cathey Collections &copy; 2025. Brooklyn, New York.</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/virginiacatheycollections" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="https://www.facebook.com/share/1MAkK8qsHK/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://www.tiktok.com/@virginiacathey" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    /* ── Page switching ── */
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+      window.scrollTo(0, 0);
+      // Update nav active states
+      ['home','fashion','shea'].forEach(p => {
+        const el = document.getElementById('nav-' + p);
+        if (el) el.classList.toggle('active', p === id);
+      });
+      // Re-trigger reveals on new page
+      setTimeout(initReveals, 50);
+    }
+
+    function closeMenu() {
+      document.getElementById('hamburger').classList.remove('open');
+      document.getElementById('nav-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* ── Cursor ── */
+    const dot  = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let rx = 0, ry = 0, dx = 0, dy = 0;
+    document.addEventListener('mousemove', e => { dx = e.clientX; dy = e.clientY; dot.style.left = dx+'px'; dot.style.top = dy+'px'; });
+    (function animRing() { rx += (dx-rx)*.12; ry += (dy-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
+    document.addEventListener('mouseover', e => { if(e.target.matches('a,button,.btn,.brand-card,.gallery-photo,.lightbox-close')) ring.classList.add('hovered'); });
+    document.addEventListener('mouseout',  e => { if(e.target.matches('a,button,.btn,.brand-card,.gallery-photo,.lightbox-close')) ring.classList.remove('hovered'); });
+
+    /* ── Nav scroll ── */
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), {passive:true});
+
+    /* ── Hamburger ── */
+    document.getElementById('hamburger').addEventListener('click', function() {
+      const open = this.classList.toggle('open');
+      document.getElementById('nav-overlay').classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    /* ── Scroll reveal ── */
+    function initReveals() {
+      const reveals = document.querySelectorAll('.page.active .reveal:not(.visible)');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+      reveals.forEach(el => obs.observe(el));
+    }
+    initReveals();
+
+    /* ── Lightbox ── */
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    document.addEventListener('click', e => {
+      if(e.target.classList.contains('gallery-photo')) { lbImg.src=e.target.src; lb.classList.add('open'); document.body.style.overflow='hidden'; }
+      if(e.target===lb || e.target.classList.contains('lightbox-close')) { lb.classList.remove('open'); document.body.style.overflow=''; }
+    });
+    document.addEventListener('keydown', e => { if(e.key==='Escape'){ lb.classList.remove('open'); document.body.style.overflow=''; } });
+
+    /* ── Count-up ── */
+    function countUp(el) {
+      const t=parseInt(el.dataset.target), s=el.dataset.suffix||'', d=2000, step=16;
+      let c=0; const inc=t/(d/step);
+      const timer=setInterval(()=>{ c+=inc; if(c>=t){el.textContent=t+s;clearInterval(timer);}else{el.textContent=Math.floor(c)+s;} },step);
+    }
+    new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ countUp(e.target); } }); },{threshold:.5})
+      .observe ? document.querySelectorAll('.count-up').forEach(el => {
+        new IntersectionObserver(entries=>{ if(entries[0].isIntersecting){ countUp(el); } },{threshold:.5}).observe(el);
+      }) : null;
+
+    /* ── Marquee pause on hover ── */
+    document.querySelectorAll('.marquee-row').forEach(row => {
+      row.addEventListener('mouseenter', () => row.querySelectorAll('.marquee-track').forEach(t => t.style.animationPlayState='paused'));
+      row.addEventListener('mouseleave', () => row.querySelectorAll('.marquee-track').forEach(t => t.style.animationPlayState='running'));
+    });
+
+    /* ── Parallax ── */
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      ['hero-parallax','fashion-parallax','shea-parallax'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.style.transform = `scale(1.08) translateY(${y*.3}px)`;
+      });
+    }, {passive:true});
+  </script>
+</body>
+</html>
